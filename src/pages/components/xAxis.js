@@ -14,41 +14,35 @@
 
 import * as d3 from 'd3';
 import React, { useRef, useEffect } from 'react';
+import 'bootstrap/dist/css/bootstrap.css'
 
+function XAxis(props) {
+    const { xScale, height, width, axisLabel } = props;
+    const ref = useRef();
 
-
-function XAxis(props){
-    const { xScale, height, width, axisLable } = props;
-    //Note:
-    //1. XAxis works for two cases: the xScale is linear (i.e., scatter plot) and the xScalse is discrete (i.e., bar chart)
-    //2. you can use typeof(xScale.domain()[0]) to decide the return value
-    //3. if typeof(xScale.domain()[0]) is a number, xScale is a linear scale; if it is a string, it is a scaleBand.
-    
-    if(xScale) {
-        const ref = React.useRef();
-
-        React.useEffect(() => {
+    useEffect(() => {
+        if (xScale) {
             const axis = typeof xScale.domain()[0] === 'number'
                 ? d3.axisBottom(xScale)
-                : d3.axisBottom(xScale).tickFormat(d => d); // Discrete scale handling
-
+                : d3.axisBottom(xScale).tickFormat(d => d);
+            
             d3.select(ref.current).call(axis);
-        }, [xScale]);
-        return <g ref={ref} transform={`translate(0, ${height})`}>
-        {/* //the if(xScale){...} means when xScale is not null, the component will return the x-axis; otherwise, it returns <g></g>
-        //we use the if ... else ... in this place so that the code can work with the SSR in Next.js;
-        //all your code should be put in this block. Remember to use typeof check if the xScale is linear or discrete. */
-        <text
+        }
+    }, [xScale]);
+
+    return (
+        <g ref={ref} transform={`translate(0, ${height})`}>
+            {xScale && (
+                <text
                     style={{ textAnchor: 'middle', fontSize: '15px' }}
                     x={width / 2}
                     y={40}
                 >
                     {axisLabel}
-                </text>}
+                </text>
+            )}
         </g>
-    }else {
-    return <g></g>
-}
+    );
 }
 
-export default XAxis
+export default XAxis;

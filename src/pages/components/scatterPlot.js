@@ -2,6 +2,7 @@ import React from 'react';
 import Points from './points';
 import XAxis from './xAxis';
 import YAxis from './yAxis';
+import 'bootstrap/dist/css/bootstrap.css'
 
 
 function ScatterPlot(props){

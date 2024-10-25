@@ -1,4 +1,4 @@
-
+import 'bootstrap/dist/css/bootstrap.css'
 
 function Points(props) {
     const {data, xScale, yScale, height, width} = props;
