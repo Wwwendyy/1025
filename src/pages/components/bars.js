@@ -7,11 +7,21 @@ function Bars(props) {
     //the if(data){...} means when data is not null, the component will return the bars; otherwise, it returns <g></g>
     //we use the if ... else ... in this place so that the code can work with the SSR in Next.js;
     if(data){
-        return <g>
-            {/* {task:
-                    1. remove this comments and put your code here
-                    2. pay attention to the height of the bars, it should be height-yScale(d.start)} */}
+        return (
+            <g>
+                {data.map((d, index) => (
+                    <rect
+                        key={index}
+                        x={xScale(d.start)}
+                        y={yScale(d.tripdurationS)}
+                        width={xScale.bandwidth()}
+                        height={height - yScale(d.tripdurationS)}
+                        fill="steelblue"
+                        stroke="black"
+                    />
+                ))}
             </g>
+        );
     } else {
         return <g></g>
     }

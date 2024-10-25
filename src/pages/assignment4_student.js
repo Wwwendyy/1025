@@ -58,8 +58,14 @@ const Charts = () => {
 
 //Q1.2: Complete the xScaleBar and yScaleBar
 //Hint: use d3.scaleBand for xScaleBar
-    const xScaleBar = []
-    const yScaleBar = []
+    const xScaleBar = d3.scaleBand()
+        .domain(data.map(d => d.start))  // Assuming 'start' is the categorical data (like station names)
+        .range([0, innerWidth])
+        .padding(0.1);
+    const yScaleBar = d3.scaleLinear()
+        .domain([0, d3.max(data, d => d.tripdurationS)])  // Assuming 'tripdurationS' is the numerical data
+        .range([innerHeightBar, 0])
+        .nice();
 
     const changeHandler = (event) => {
         setMonth(event.target.value);
