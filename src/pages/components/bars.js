@@ -13,9 +13,9 @@ function Bars(props) {
                     <rect
                         key={index}
                         x={xScale(d.start)}
-                        y={yScale(d.tripdurationS)}
+                        y={yScale(d.start)}
                         width={xScale.bandwidth()}
-                        height={height - yScale(d.tripdurationS)}
+                        height={height - yScale(d.start)}
                         fill="steelblue"
                         stroke="black"
                     />
