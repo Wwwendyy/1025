@@ -15,6 +15,8 @@ function Points(props) {
                 cy={yScale(d.tripdurationE)}
                 r={5}
                 fill="steelblue"
+                stroke="black"
+                strokeWidth={1}
             />
         ))}
 
