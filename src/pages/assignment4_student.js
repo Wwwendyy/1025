@@ -80,16 +80,30 @@ const Charts = () => {
                 
             </Row>
             <Row className='justify-content-md-center'>
+                {/*Scatter Plot */}
                 <Col>
                     <svg width={WIDTH} height={HEIGHT}>
-                        <ScatterPlot offsetX={margin.left} offsetY={margin.top} data={data} xScale={xScaleScatter} yScale={yScaleScatter} 
-                        height={innerHeightScatter} width={innerWidth}/>
+                        <ScatterPlot
+                            offsetX={margin.left}
+                            offsetY={margin.top}
+                            data={data}
+                            xScale={xScaleScatter}
+                            yScale={yScaleScatter}
+                            height={innerHeightScatter}
+                            width={innerWidth}/>
                     </svg>
                 </Col>
                 <Col>
+                {/*Bar Chart */}
                     <svg width={WIDTH} height={HEIGHT}>
-                        <BarChart offsetX={margin.left} offsetY={margin.top} data={data} xScale={xScaleBar} 
-                        yScale={yScaleBar} height={innerHeightBar} width={innerWidth}/>
+                        <BarChart
+                        offsetX={margin.left}
+                        offsetY={margin.top}
+                        data={data}
+                        xScale={xScaleBar} 
+                        yScale={yScaleBar}
+                        height={innerHeightBar}
+                        width={innerWidth}/>
                     </svg>
                 </Col>
             </Row>
