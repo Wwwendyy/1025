@@ -12,6 +12,7 @@
 // - xScale: the scale for the x coordinate
 // - yScale: the scale for the y coordinate
 
+import * as d3 from 'd3';
 
 
 
@@ -23,10 +24,26 @@ function XAxis(props){
     //3. if typeof(xScale.domain()[0]) is a number, xScale is a linear scale; if it is a string, it is a scaleBand.
     
     if(xScale) {
-        return <g>
+        const ref = React.useRef();
+
+        React.useEffect(() => {
+            const axis = typeof xScale.domain()[0] === 'number'
+                ? d3.axisBottom(xScale)
+                : d3.axisBottom(xScale).tickFormat(d => d); // Discrete scale handling
+
+            d3.select(ref.current).call(axis);
+        }, [xScale]);
+        return <g ref={ref} transform={`translate(0, ${height})`}>
         {/* //the if(xScale){...} means when xScale is not null, the component will return the x-axis; otherwise, it returns <g></g>
         //we use the if ... else ... in this place so that the code can work with the SSR in Next.js;
-        //all your code should be put in this block. Remember to use typeof check if the xScale is linear or discrete. */}
+        //all your code should be put in this block. Remember to use typeof check if the xScale is linear or discrete. */
+        <text
+                    style={{ textAnchor: 'middle', fontSize: '15px' }}
+                    x={width / 2}
+                    y={40}
+                >
+                    {axisLabel}
+                </text>}
         </g>
     }else {
     return <g></g>

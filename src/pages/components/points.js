@@ -1,4 +1,5 @@
 
+
 function Points(props) {
     const {data, xScale, yScale, height, width} = props;
     //Note: 
@@ -6,7 +7,16 @@ function Points(props) {
     //we use the if ... else ... in this place so that the code can work with the SSR in Next.js;
     if(data){
         return <g>
-        {/* task:1. remove this comments and put your code here */}
+        {/* task:1. remove this comments and put your code here */
+        data.map((d, index) => (
+            <circle
+                key={index}
+                cx={xScale(d.tripdurationS)}
+                cy={yScale(d.tripdurationE)}
+                r={5}
+                fill="steelblue"
+            />
+        ))}
 
         </g>
     } else {
