@@ -1,4 +1,5 @@
 import * as d3 from 'd3';
+import React, { useRef, useEffect } from 'react';
 
 
 function YAxis(props){

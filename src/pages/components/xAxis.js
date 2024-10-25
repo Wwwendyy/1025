@@ -13,6 +13,7 @@
 // - yScale: the scale for the y coordinate
 
 import * as d3 from 'd3';
+import React, { useRef, useEffect } from 'react';
 
 
 
