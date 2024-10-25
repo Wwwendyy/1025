@@ -14,7 +14,7 @@ function Points(props) {
                 cx={xScale(d.tripdurationS)}
                 cy={yScale(d.tripdurationE)}
                 r={5}
-                fill="red"
+                fill="steelblue"
                 stroke="black"
                 strokeWidth={1}
             />
