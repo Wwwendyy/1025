@@ -19,7 +19,9 @@ function YAxis(props) {
             {yScale && (
                 <text
                     style={{ textAnchor: 'end', fontSize: '15px' }}
-                    transform={`translate(20, 0)rotate(-90)`}
+                    transform={`rotate(-90)`}
+                    x={-height / 2}
+                    y={-40}
                 >
                     {axisLabel}
                 </text>
