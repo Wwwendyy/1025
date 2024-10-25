@@ -59,7 +59,7 @@ const Charts = () => {
 //Q1.2: Complete the xScaleBar and yScaleBar
 //Hint: use d3.scaleBand for xScaleBar
     const xScaleBar = d3.scaleBand()
-        .domain(data.map(d => d.start))  // Assuming 'start' is the categorical data (like station names)
+        .domain(data.map(d => d.station))  // Assuming 'start' is the categorical data (like station names)
         .range([0, innerWidth])
         .padding(0.1);
     const yScaleBar = d3.scaleLinear()
