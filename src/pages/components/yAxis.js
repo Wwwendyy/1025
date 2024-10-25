@@ -23,7 +23,7 @@ function YAxis(props) {
                     x={-height / 2}
                     y={-45}
                 >
-                    {axisLabel}
+                {axisLabel}
                 </text>
             )}
         </g>
