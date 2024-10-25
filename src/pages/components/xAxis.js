@@ -36,7 +36,7 @@ function XAxis(props) {
                 <text
                     style={{ textAnchor: 'middle', fontSize: '15px' }}
                     x={width / 2}
-                    y={50}
+                    y={height + 35}
                 >
                     {axisLabel}
                 </text>

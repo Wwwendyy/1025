@@ -21,7 +21,7 @@ function YAxis(props) {
                     style={{ textAnchor: 'end', fontSize: '15px' }}
                     transform={`rotate(-90)`}
                     x={-height / 2}
-                    y={-40}
+                    y={-45}
                 >
                     {axisLabel}
                 </text>
