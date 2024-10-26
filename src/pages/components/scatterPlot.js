@@ -21,7 +21,7 @@ function ScatterPlot(props) {
                 width={width}
                 hoveredStation={hoveredStation}
                 onMouseEnter={onMouseEnter}
-                onMouseOut={onMouseOut}
+                onMouseOut={() => setTooltipData(null)}
                 setTooltipData={setTooltipData}
                 setTooltipPos={setTooltipPos}
             />
