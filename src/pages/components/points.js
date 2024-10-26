@@ -31,7 +31,8 @@ function Points(props) {
                     x={0}
                     y={0}
                     width={width}
-                    height={height}                        fill="yellow"
+                    height={height}
+                    fill="yellow"
                     opacity={0.5}
                 />
             )}
