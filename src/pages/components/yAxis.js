@@ -1,14 +1,13 @@
 import React, { useRef, useEffect } from 'react';
-import {select, axisLeft} from 'd3'; // Import axisLeft from d3-axis
+import {select, axisLeft} from 'd3';
 
 function YAxis(props) {
-    const { yScale, height, axisLabel } = props; // Correct axisLabel spelling
-    const axisRef = useRef(null); // Use useRef here
+    const { yScale, height, axisLabel } = props;
+    const axisRef = useRef(null);
 
     useEffect(() => {
         if (yScale) {
             const axis = axisLeft(yScale);
-            //const isLinear = typeof yScale.domain()[0] === 'number';
             select(axisRef.current).call(axis);
         }
     }, [yScale]); // Only depend on yScale
@@ -17,7 +16,10 @@ function YAxis(props) {
         <g>
             <g ref={axisRef}></g>
             <svg>
-                <text style={{ textAnchor: 'end', fontSize: '15px' }} transform={`translate(20, 0) rotate(-90)`}>
+                <text
+                    style={{ textAnchor: 'end', fontSize: '15px' }} 
+                    transform={`translate(10, 0) rotate(-90)`}
+                >
                     {axisLabel}
                 </text>
             </svg>
