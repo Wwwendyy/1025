@@ -43,7 +43,7 @@ function XAxis(props) {
             <g ref={axisRef}></g>
                 <text
                     style={{ textAnchor: 'end', fontSize: '18px' }}
-                    transform={`translate(${width}, -10)`}
+                    transform={`translate(${width}, -8)`}
                 >
                     {axisLabel}
                 </text>
