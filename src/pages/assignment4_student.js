@@ -26,7 +26,7 @@ function useData(csvPath){
 }
 const Charts = () => {
     const [month, setMonth] = React.useState('4');
-    const [hoveredStation, setHoveredStation] = React.useState(null);
+    const [infoStation, setInfoStation] = React.useState(null);
     //Q1.5 define hooks to link the points and bars
     //Notes: you should define the hooks at the beginning of the component; a hook cannot be defined after the if ... else... statement;
     const [tooltipData, setTooltipData] = React.useState(null);
@@ -84,8 +84,8 @@ const Charts = () => {
                         <ScatterPlot offsetX={margin.left} offsetY={margin.top} data={data}
                                     xScale={xScaleScatter} yScale={yScaleScatter}
                                     height={innerHeightScatter} width={innerWidth}
-                                    hoveredStation={hoveredStation}
-                                    onMouseEnter={setHoveredStation} onMouseOut={() => setHoveredStation(null)}
+                                    infoStation={infoStation}
+                                    onMouseEnter={setInfoStation} onMouseOut={() => setInfoStation(null)}
                                     setTooltipData={setTooltipData} setTooltipPos={setTooltipPos}
                         />
                     </svg>
@@ -95,8 +95,8 @@ const Charts = () => {
                         <BarChart offsetX={margin.left} offsetY={margin.top} data={data}
                         xScale={xScaleBar} yScale={yScaleBar}
                         height={innerHeightBar} width={innerWidth}
-                        hoveredStation={hoveredStation}
-                        onMouseEnter={setHoveredStation} onMouseOut={() => setHoveredStation(null)}/>
+                        infoStation={infoStation}
+                        onMouseEnter={setInfoStation} onMouseOut={() => setInfoStation(null)}/>
                     </svg>
                 </Col>
             </Row>

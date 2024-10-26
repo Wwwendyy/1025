@@ -5,7 +5,7 @@ import XAxis from './xAxis';
 
 function ScatterPlot(props) {
     const { offsetX, offsetY, data, xScale, yScale,
-            height, width, hoveredStation, onMouseEnter, onMouseOut,
+            height, width, infoStation, onMouseEnter, onMouseOut,
             setTooltipData, setTooltipPos } = props;
     const handleMouseEnter = (station, event) => {setTooltipData(station);
                                                 setTooltipPos({ x: event.pageX, y: event.pageY });
@@ -19,7 +19,7 @@ function ScatterPlot(props) {
                 yScale={yScale}
                 height={height}
                 width={width}
-                hoveredStation={hoveredStation}
+                infoStation={infoStation}
                 onMouseEnter={onMouseEnter}
                 onMouseOut={() => setTooltipData(null)}
                 setTooltipData={setTooltipData}
