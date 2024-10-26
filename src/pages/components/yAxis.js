@@ -1,31 +1,28 @@
-import * as d3 from 'd3';
 import React, { useRef, useEffect } from 'react';
-import 'bootstrap/dist/css/bootstrap.css'
-
+import { axisLeft } from 'd3-axis'; // Import axisLeft from d3-axis
+import { select } from 'd3-selection';
 
 function YAxis(props) {
-    const { yScale, height, axisLabel, fontSize=12} = props;
-    const ref = useRef();
+    const { yScale, height, axisLabel } = props; // Correct axisLabel spelling
+    const axisRef = useRef(null); // Use useRef here
 
     useEffect(() => {
         if (yScale) {
-            const axis = d3.axisLeft(yScale);
-            d3.select(ref.current).call(axis);
+            const isLinear = typeof yScale.domain()[0] === 'number';
+            
+            const axis = axisLeft(yScale);
+            select(axisRef.current).call(axis);
         }
-    }, [yScale]);
+    }, [yScale]); // Only depend on yScale
 
     return (
-        <g ref={ref}>
-            {yScale && (
-                <text
-                    style={{ textAnchor: 'end', fontSize: '${fontSize}px' }}
-                    transform={`rotate(-90)`}
-                    x={-height / 2}
-                    y={-45}
-                >
-                {axisLabel}
+        <g>
+            <g ref={axisRef}></g>
+            <svg>
+                <text style={{ textAnchor: 'end', fontSize: '15px' }} transform={`translate(20, 0) rotate(-90)`}>
+                    {axisLabel}
                 </text>
-            )}
+            </svg>
         </g>
     );
 }

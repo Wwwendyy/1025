@@ -12,39 +12,36 @@
 // - xScale: the scale for the x coordinate
 // - yScale: the scale for the y coordinate
 
-import * as d3 from 'd3';
-import React, { useRef, useEffect } from 'react';
-import 'bootstrap/dist/css/bootstrap.css'
+import React from 'react';
+import { select } from 'd3-selection';
+import { axisBottom } from 'd3-axis';
 
 function XAxis(props) {
-    const { xScale, height, width, axisLabel, fontSize = 12, rotateLabels=false} = props;
-    const ref = useRef();
+    const { xScale, height, width, axisLabel} = props;
+    const axisRef = React.useRef(null);
 
-    useEffect(() => {
+    // Create the axis whenever xScale changes
+    React.useEffect(() => {
         if (xScale) {
-            const axis = typeof xScale.domain()[0] === 'number'
-                ? d3.axisBottom(xScale)
-                : d3.axisBottom(xScale).tickFormat(d => d);
-            d3.select(ref.current).call(axis);
-            if (rotateLabels){
-                d3.select(ref.current).selectAll("text").attr("transform", "end");
+            const axis = axisBottom(xScale);
+            select(axisRef.current).call(axis);
             }
-        }
-    }, [xScale, rotateLabels]);
+            const isLinear = typeof xScale.domain()[0] === 'number';
+            
+            select(axisRef.current)
+                .selectAll("text")
+                .style("text-anchor", "start")
+                .attr("transform", isLinear ? "rotate(0)" : "rotate(70)");
+    }, [xScale]);
 
     return (
-        <g ref={ref} transform={`translate(0, ${height})`}>
-            {xScale && (
-                <text
-                    style={{ textAnchor: 'end', fontSize: '${fontSize}px' }}
-                    x={width / 2}
-                    y={height + 35}
-                >
+        <g transform={`translate(0, ${height})`}>
+            <g ref={axisRef}></g>
+                <text style={{ textAnchor: 'end', fontSize: '15px' }} transform={`translate(${width}, -10)`}>
                     {axisLabel}
                 </text>
-            )}
         </g>
     );
 }
 
-export default XAxis;
+export default XAxis
