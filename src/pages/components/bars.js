@@ -3,7 +3,7 @@ import React from 'react';
 function Bars(props) {
     const { data, xScale, yScale, height, hoveredStation, onMouseEnter, onMouseOut } = props;
     // Function to determine the color of the bar
-    const getColor = (station) => {
+    const barColor = (station) => {
         return station === hoveredStation ? 'red' : 'steelblue';
     };
         //Note:
@@ -16,16 +16,16 @@ function Bars(props) {
                     2. pay attention to the height of the bars, it should be height-yScale(d.start)} */}
         return (
             <g>
-                {data.map((d, i) => (
+                {data.map((d, index) => (
                     <rect
-                        key={i}
+                        key={index}
                         x={xScale(d.station)}
-                        y={yScale(d.start)} 
+                        y={yScale(d.start)}
                         width={xScale.bandwidth()}
                         height={height - yScale(d.start)}
-                        fill={getColor(d.station)}
-                        stroke="black" 
-                        strokeWidth={1} 
+                        fill={barColor(d.station)}
+                        stroke="black"
+                        strokeWidth={1}
                         onMouseEnter={() => onMouseEnter(d.station)} // Use the passed onMouseEnter
                         onMouseOut={onMouseOut} // Use the passed onMouseOut
                         style={{ transition: 'fill 0.2s' }} 
