@@ -3,9 +3,9 @@ import React from 'react';
 function Points(props) {
     const { data, xScale, yScale, height, width, infoStation, setTooltipData, setTooltipPos, onMouseEnter } = props;
 
-    const circleColor = (station) => {return station === infoStation ? 'red' : 'steelblue';};
+    const getColor = (station) => {return station === infoStation ? 'red' : 'steelblue';};
 
-    const circleRadius = (station) => {return station === infoStation ? 10 : 5;};
+    const getRadius = (station) => {return station === infoStation ? 10 : 5;};
 
     const handleMouseEnter = (dataPoint, event) => {
                                                     setTooltipData(dataPoint);
@@ -20,10 +20,10 @@ function Points(props) {
                     <rect
                         x={0}
                         y={0}
-                        width={width}
                         height={height}
-                        fill="yellow"
+                        width={width}
                         opacity={0.5}
+                        fill="yellow"
                     />
                 )}
                 {data.map((d, i) => (
@@ -31,10 +31,10 @@ function Points(props) {
                         key={i}
                         cx={xScale(d.tripdurationS)} 
                         cy={yScale(d.tripdurationE)}
-                        r={circleRadius(d.station)}
-                        fill={circleColor(d.station)}
-                        stroke="black"
+                        r={getRadius(d.station)}
+                        fill={getColor(d.station)}
                         strokeWidth={1}
+                        stroke="black"
                         onMouseEnter={(event) => handleMouseEnter(d, event)}
                         onMouseOut={() => {setTooltipData(null);}}
                         style={{ transition: 'fill 0.2s, r 0.2s' }}
