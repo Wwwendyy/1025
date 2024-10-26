@@ -92,16 +92,6 @@ const Charts = () => {
                             yScale={yScaleScatter}
                             height={innerHeightScatter}
                             width={innerWidth}/>
-                        <XAxis
-                            xScale={xScaleScatter}
-                            height={innerHeightScatter}
-                            width={innerWidth}
-                            axisLabel="Trip Duration Start From"/>
-                        <YAxis 
-                                yScale={yScaleScatter}
-                                height={innerHeightScatter}
-                                axisLabel="Trip Duration End In"
-                            />
                     </svg>
                 </Col>
                 <Col>
@@ -115,17 +105,6 @@ const Charts = () => {
                             yScale={yScaleBar}
                             height={innerHeightBar}
                             width={innerWidth}/>
-                        <XAxis 
-                            xScale={xScaleBar}
-                            height={innerHeightBar}
-                            width={innerWidth}
-                            axisLabel="Stations"
-                            />
-                        <YAxis 
-                            yScale={yScaleBar}
-                            height={innerHeightBar}
-                            axisLabel="Bikers Start From"
-                            />
                     </svg>
                 </Col>
             </Row>
