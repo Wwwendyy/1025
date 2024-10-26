@@ -18,7 +18,7 @@ function YAxis(props) {
         <g ref={ref}>
             {yScale && (
                 <text
-                    style={{ textAnchor: 'end', fontSize: '15px' }}
+                    style={{ textAnchor: 'end', fontSize: '18px' }}
                     transform={`rotate(-90)`}
                     x={-height / 2}
                     y={-45}

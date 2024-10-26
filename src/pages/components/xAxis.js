@@ -25,7 +25,6 @@ function XAxis(props) {
             const axis = typeof xScale.domain()[0] === 'number'
                 ? d3.axisBottom(xScale)
                 : d3.axisBottom(xScale).tickFormat(d => d);
-            
             d3.select(ref.current).call(axis);
         }
     }, [xScale]);
@@ -34,7 +33,7 @@ function XAxis(props) {
         <g ref={ref} transform={`translate(0, ${height})`}>
             {xScale && (
                 <text
-                    style={{ textAnchor: 'middle', fontSize: '15px' }}
+                    style={{ textAnchor: 'end', fontSize: '18px' }}
                     x={width / 2}
                     y={height + 35}
                 >
