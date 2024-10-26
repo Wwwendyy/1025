@@ -1,10 +1,10 @@
 import React from 'react';
 
 function Bars(props) {
-    const { data, xScale, yScale, height, hoveredStation, onMouseEnter, onMouseOut } = props;
+    const { data, xScale, yScale, height, infoStation, onMouseEnter, onMouseOut } = props;
     // Function to determine the color of the bar
     const barColor = (station) => {
-        return station === hoveredStation ? 'red' : 'steelblue';
+        return station === infoStation ? 'red' : 'steelblue';
     };
         //Note:
         //the if(data){...} means when data is not null, the component will return the bars; otherwise, it returns <g></g>
