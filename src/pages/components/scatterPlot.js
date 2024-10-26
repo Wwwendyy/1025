@@ -8,7 +8,7 @@ function ScatterPlot(props) {
             height, width, infoStation, onMouseEnter, onMouseOut,
             setTooltipData, setTooltipPos } = props;
     return (
-        <g transform={translate(${offsetX}, ${offsetY})}>
+        <g transform={'translate(${offsetX}, ${offsetY})'}>
             <Points
                 data={data}
                 xScale={xScale}
