@@ -6,6 +6,8 @@ import { Row, Col, Container} from 'react-bootstrap'
 import ScatterPlot from './components/scatterPlot'
 import BarChart from './components/barChart'
 import Tooltip from './components/tooltips'
+import XAxis from './components/xAxis';
+import YAxis from './components/yAxis';
 
 
 const csvUrl = 'https://gist.githubusercontent.com/hogwild/3b9aa737bde61dcb4dfa60cde8046e04/raw/citibike2020.csv'
@@ -77,7 +79,6 @@ const Charts = () => {
                     <input key="slider" type='range' min='0' max='11' value={month} step='1' onChange={changeHandler}/>
                     <input key="monthText" type="text" value={MONTH[month]} readOnly/>
                 </Col>
-                
             </Row>
             <Row className='justify-content-md-center'>
                 {/*Scatter Plot */}
@@ -91,19 +92,40 @@ const Charts = () => {
                             yScale={yScaleScatter}
                             height={innerHeightScatter}
                             width={innerWidth}/>
+                        <XAxis
+                            xScale={xScaleScatter}
+                            height={innerHeightScatter}
+                            width={innerWidth}
+                            axisLabel="Trip Duration Start From"/>
+                        <YAxis 
+                                yScale={yScaleScatter}
+                                height={innerHeightScatter}
+                                axisLabel="Trip Duration End In"
+                            />
                     </svg>
                 </Col>
                 <Col>
                 {/*Bar Chart */}
                     <svg width={WIDTH} height={HEIGHT}>
                         <BarChart
-                        offsetX={margin.left}
-                        offsetY={margin.top}
-                        data={data}
-                        xScale={xScaleBar} 
-                        yScale={yScaleBar}
-                        height={innerHeightBar}
-                        width={innerWidth}/>
+                            offsetX={margin.left}
+                            offsetY={margin.top}
+                            data={data}
+                            xScale={xScaleBar} 
+                            yScale={yScaleBar}
+                            height={innerHeightBar}
+                            width={innerWidth}/>
+                        <XAxis 
+                            xScale={xScaleBar}
+                            height={innerHeightBar}
+                            width={innerWidth}
+                            axisLabel="Stations"
+                            />
+                        <YAxis 
+                            yScale={yScaleBar}
+                            height={innerHeightBar}
+                            axisLabel="Bikers Start From"
+                            />
                     </svg>
                 </Col>
             </Row>

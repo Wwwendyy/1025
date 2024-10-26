@@ -17,23 +17,23 @@ import React, { useRef, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.css'
 
 function XAxis(props) {
-    const { xScale, height, width, axisLabel } = props;
+    const { xScale, height, width, axisLabel, tickSize=6, fontSize = 12 } = props;
     const ref = useRef();
 
     useEffect(() => {
         if (xScale) {
             const axis = typeof xScale.domain()[0] === 'number'
-                ? d3.axisBottom(xScale)
-                : d3.axisBottom(xScale).tickFormat(d => d);
+                ? d3.axisBottom(xScale).tickSize(tickSize)
+                : d3.axisBottom(xScale).tickFormat(d => d).tickSize(tickSize);
             d3.select(ref.current).call(axis);
         }
-    }, [xScale]);
+    }, [xScale, tickSize]);
 
     return (
         <g ref={ref} transform={`translate(0, ${height})`}>
             {xScale && (
                 <text
-                    style={{ textAnchor: 'end', fontSize: '18px' }}
+                    style={{ textAnchor: 'end', fontSize: '${fontSize}px' }}
                     x={width / 2}
                     y={height + 35}
                 >
