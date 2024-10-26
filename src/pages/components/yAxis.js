@@ -10,7 +10,7 @@ function YAxis(props) {
             const axis = axisLeft(yScale);
             select(axisRef.current).call(axis);
         }
-    }, [yScale]); // Only depend on yScale
+    }, [yScale]);
 
     return (
         <g>
