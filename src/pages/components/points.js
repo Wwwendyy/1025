@@ -27,7 +27,7 @@ function Points(props) {
                         width={width}
                         height={height}
                         fill="yellow"
-                        opacity={0.6}  
+                        opacity={0.6} 
                     />
                 )}
                 {data.map((d, i) => (
@@ -36,7 +36,7 @@ function Points(props) {
                             key={i}
                             cx={xScale(d.tripdurationS)}
                             cy={yScale(d.tripdurationE)}
-                            r={getRadius(i)}  
+                            r={getRadius(i)}
                             fill={getColor(i)}  
                             stroke={"black"}
                             onMouseOver={(event) => mouseOver(i, event)}
@@ -49,8 +49,8 @@ function Points(props) {
                     <circle
                         cx={xScale(data[selectedItem].tripdurationS)}  
                         cy={yScale(data[selectedItem].tripdurationE)}
-                        r={getRadius(selectedItem)}  
-                        fill={getColor(selectedItem)} 
+                        r={getRadius(selectedItem)}
+                        fill={getColor(selectedItem)}
                         stroke={"black"}
                         onMouseOver={(event) => mouseOver(selectedItem, event)}
                         onMouseOut={mouseOut}
