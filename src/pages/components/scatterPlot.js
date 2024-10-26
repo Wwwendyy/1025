@@ -7,7 +7,7 @@ function ScatterPlot(props) {
     const { offsetX, offsetY, data, xScale, yScale,
             height, width, infoStation, onMouseEnter, onMouseOut,
             setTooltipData, setTooltipPos } = props;
-    const [infoPoint, setInfoPoint] = useState(null);
+    const [infoPoint, setInfoPoint] = React.useState(null);
     const handleMouseEnter = (d, event) => {
         setInfoPoint(d); // Track the hovered point
         onMouseEnter(d); // Call the external onMouseEnter function
@@ -28,7 +28,7 @@ function ScatterPlot(props) {
                 height={height}
                 width={width}
                 infoStation={infoStation}
-                onMouseEnter={onMouseEnter}
+                onMouseEnter={(d, event) => handleMouseEnter(d, event)}
                 onMouseOut={() => setTooltipData(null)}
                 setTooltipData={setTooltipData}
                 setTooltipPos={setTooltipPos}
