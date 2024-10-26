@@ -7,6 +7,10 @@ function Points(props) {
 
     const circleRadius = (station) => {return station === infoStation ? 10 : 5;};
 
+    const circleOpacity = (station) => {
+        return infoStation ? (station === infoStation ? 1 : 0.5) : 1;
+    };
+
     const handleMouseEnter = (dataPoint, event) => {
                                                     setTooltipData(dataPoint);
                                                     setTooltipPos({ x: event.pageX, y: event.pageY });
@@ -23,7 +27,7 @@ function Points(props) {
                         width={width}
                         height={height}
                         fill="yellow"
-                        opacity={0.5}
+                        opacity={0.2}
                     />
                 )}
                 {data.map((d, i) => (
@@ -37,7 +41,7 @@ function Points(props) {
                         strokeWidth={1}
                         onMouseEnter={(event) => handleMouseEnter(d, event)}
                         onMouseOut={() => {setTooltipData(null);}}
-                        style={{ transition: 'fill 0.2s, r 0.2s' }}
+                        style={{ transition: 'fill 0.2s, r 0.2s, opacity 0.2s' }}
                     />
                 ))}
             </g>
