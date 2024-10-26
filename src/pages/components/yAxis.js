@@ -18,7 +18,7 @@ function YAxis(props) {
             <svg>
                 <text
                     style={{ textAnchor: 'end', fontSize: '15px' }} 
-                    transform={`translate(10, 0) rotate(-90)`}
+                    transform={`translate(15, 0) rotate(-90)`}
                 >
                     {axisLabel}
                 </text>
