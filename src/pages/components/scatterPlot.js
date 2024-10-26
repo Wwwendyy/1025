@@ -2,30 +2,40 @@ import React from 'react';
 import Points from './points';
 import YAxis from './yAxis';
 import XAxis from './xAxis';
+
 function ScatterPlot(props) {
     const { offsetX, offsetY, data, xScale, yScale, height, width, hoveredStation, onMouseEnter, onMouseOut, setTooltipData, setTooltipPos } = props;
-    
-    const handleMouseEnter = (station, event) => {
+
+    /*const handleMouseEnter = (station, event) => {
         setTooltipData(station);
         setTooltipPos({ x: event.pageX, y: event.pageY });
         onMouseEnter(station);
-    };
+    };*/
     return (
         <g transform={`translate(${offsetX}, ${offsetY})`}>
-            <Points 
-                data={data} 
-                xScale={xScale} 
-                yScale={yScale} 
-                height={height} 
-                width={width} 
+            <Points
+                data={data}
+                xScale={xScale}
+                yScale={yScale}
+                height={height}
+                width={width}
                 hoveredStation={hoveredStation}
                 onMouseEnter={onMouseEnter}
-                onMouseOut={() => setTooltipData(null)}
+                onMouseOut={onMouseOut}
                 setTooltipData={setTooltipData}
                 setTooltipPos={setTooltipPos}
             />
-            <YAxis yScale={yScale} height={height} axisLabel={"Trip duration end in"} />
-            <XAxis xScale={xScale} height={height} width = {width} axisLabel={"Trip duration start from"} />
+            <YAxis
+                yScale={yScale}
+                height={height}
+                axisLabel={"Trip duration end in"}
+            />
+            <XAxis
+                xScale={xScale}
+                height={height}
+                width = {width}
+                axisLabel={"Trip duration start from"}
+            />
         </g>
     );
 }
