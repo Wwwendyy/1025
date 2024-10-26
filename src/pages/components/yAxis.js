@@ -25,7 +25,7 @@ function YAxis(props) {
                 style={{ textAnchor: 'end', fontSize: '15px' }}
                 transform={`translate(20, 0)rotate(-90)`}
             >
-                {axisLable}
+                {axisLabel}
             </text>
         </g>
     );
