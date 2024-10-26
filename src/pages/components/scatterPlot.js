@@ -4,13 +4,9 @@ import YAxis from './yAxis';
 import XAxis from './xAxis';
 
 function ScatterPlot(props) {
-    const { offsetX, offsetY, data, xScale, yScale, height, width, hoveredStation, onMouseEnter, onMouseOut, setTooltipData, setTooltipPos } = props;
-
-    /*const handleMouseEnter = (station, event) => {
-        setTooltipData(station);
-        setTooltipPos({ x: event.pageX, y: event.pageY });
-        onMouseEnter(station);
-    };*/
+    const { offsetX, offsetY, data, xScale, yScale,
+            height, width, hoveredStation, onMouseEnter, onMouseOut,
+            setTooltipData, setTooltipPos } = props;
     return (
         <g transform={`translate(${offsetX}, ${offsetY})`}>
             <Points
