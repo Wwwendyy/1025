@@ -1,4 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.css'
+import React from 'react';
 
 function Points(props) {
     const {data, xScale, yScale, height, width, hoveredStation, setTooltipData, setTooltipPos, onMouseEnter} = props;
