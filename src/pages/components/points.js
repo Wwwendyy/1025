@@ -1,17 +1,12 @@
 import React from 'react';
 
 function Points(props) {
-    const { data, xScale, yScale, height, width, hoveredStation, setTooltipData, setTooltipPos, onMouseEnter } = props;
+    const { data, xScale, yScale, height, width,
+        hoveredStation, setTooltipData, setTooltipPos, onMouseEnter } = props;
 
-    // Function to determine the color of the circle
-    const getColor = (station) => {
-        return station === hoveredStation ? 'red' : 'steelblue';
-    };
+    const circleColor = (station) => {return station === hoveredStation ? 'red' : 'steelblue';};
 
-    // Function to determine the radius of the circle
-    const getRadius = (station) => {
-        return station === hoveredStation ? 10 : 5;
-    };
+    const circleRadius = (station) => {return station === hoveredStation ? 10 : 5;};
 
     const handleMouseEnter = (dataPoint, event) => {
         setTooltipData(dataPoint);
@@ -19,15 +14,9 @@ function Points(props) {
         onMouseEnter(dataPoint.station);
     };
 
-    const handleMouseOut = () => {
-        setTooltipData(null);
-    };
-
-
     if (data) {
         return (
             <g>
-                {/* Yellow rectangle covering all points when a point is hovered */}
                 {hoveredStation && (
                     <rect
                         x={0}
@@ -38,17 +27,17 @@ function Points(props) {
                         opacity={0.5}
                     />
                 )}
-                {data.map((d, i) => (
+                {data.map((d, index) => (
                     <circle
-                        key={i}
-                        cx={xScale(d.tripdurationS)} 
+                        key={index}
+                        cx={xScale(d.tripdurationS)}
                         cy={yScale(d.tripdurationE)}
-                        r={getRadius(d.station)}
-                        fill={getColor(d.station)}
+                        r={circleRadius(d.station)}
+                        fill={circleColor(d.station)}
                         stroke="black"
                         strokeWidth={1}
                         onMouseEnter={(event) => handleMouseEnter(d, event)}
-                        onMouseOut={handleMouseOut}
+                        onMouseOut={setTooltipData(null)}
                         style={{ transition: 'fill 0.2s, r 0.2s' }}
                     />
                 ))}
