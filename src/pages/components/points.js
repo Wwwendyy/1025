@@ -1,12 +1,15 @@
 import React from 'react';
 
 function Points(props) {
-    const { data, xScale, yScale, height, width,
-        hoveredStation, setTooltipData, setTooltipPos, onMouseEnter } = props;
+    const { data, xScale, yScale, height, width, infoStation, setTooltipData, setTooltipPos, onMouseEnter } = props;
 
-    const circleColor = (station) => {return station === hoveredStation ? 'red' : 'steelblue';};
+    const circleColor = (station) => {
+        return station === infoStation ? 'red' : 'steelblue';
+    };
 
-    const circleRadius = (station) => {return station === hoveredStation ? 10 : 5;};
+    const circleRadius = (station) => {
+        return station === infoStation ? 10 : 5;
+    };
 
     const handleMouseEnter = (dataPoint, event) => {
         setTooltipData(dataPoint);
@@ -14,10 +17,15 @@ function Points(props) {
         onMouseEnter(dataPoint.station);
     };
 
+    const handleMouseOut = () => {
+        setTooltipData(null);
+    };
+
+
     if (data) {
         return (
             <g>
-                {hoveredStation && (
+                {infoStation && (
                     <rect
                         x={0}
                         y={0}
@@ -27,17 +35,17 @@ function Points(props) {
                         opacity={0.5}
                     />
                 )}
-                {data.map((d, index) => (
+                {data.map((d, i) => (
                     <circle
-                        key={index}
-                        cx={xScale(d.tripdurationS)}
+                        key={i}
+                        cx={xScale(d.tripdurationS)} 
                         cy={yScale(d.tripdurationE)}
                         r={circleRadius(d.station)}
                         fill={circleColor(d.station)}
                         stroke="black"
                         strokeWidth={1}
                         onMouseEnter={(event) => handleMouseEnter(d, event)}
-                        onMouseOut={setTooltipData(null)}
+                        onMouseOut={handleMouseOut}
                         style={{ transition: 'fill 0.2s, r 0.2s' }}
                     />
                 ))}
