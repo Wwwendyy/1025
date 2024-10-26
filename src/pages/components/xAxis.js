@@ -30,7 +30,7 @@ function XAxis(props) {
             select(axisRef.current)
                 .selectAll("text")
                 .style("text-anchor", "start")
-                .attr("transform", isLinear ? "rotate(0)" : "rotate(70)");
+                .attr("transform", isLinear ? "rotate(0)" : "rotate(80)");
     }, [xScale]);
 
     return (
