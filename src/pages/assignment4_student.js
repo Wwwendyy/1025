@@ -43,11 +43,9 @@ const Charts = () => {
     const innerHeightBar = HEIGHT - margin.top - margin.bottom-120;
     const innerWidth = WIDTH - margin.left - margin.right;
     const MONTH = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    const data = dataAll.filter( d => { 
-        return d.month === MONTH[month] 
+    const data = dataAll.filter( d => {
+        return d.month === MONTH[month]
     });
-
-    const maxStart = d3.max(dataAll, d => d.start);
 
     const xScaleScatter = d3.scaleLinear()
                             .domain([0, d3.max(dataAll, d => d.tripdurationS)])
@@ -83,26 +81,26 @@ const Charts = () => {
             <Row className='justify-content-md-center'>
                 <Col>
                     <svg width={WIDTH} height={HEIGHT}>
-                        <ScatterPlot offsetX={margin.left} offsetY={margin.top} data={data} xScale={xScaleScatter} yScale={yScaleScatter} 
-                        height={innerHeightScatter} width={innerWidth} 
-                        hoveredStation={hoveredStation}
-                        onMouseEnter={setHoveredStation}
-                        onMouseOut={() => setHoveredStation(null)}
-                        setTooltipData={setTooltipData} // Pass hooks to Points
-                        setTooltipPos={setTooltipPos}/>
+                        <ScatterPlot offsetX={margin.left} offsetY={margin.top} data={data}
+                                    xScale={xScaleScatter} yScale={yScaleScatter}
+                                    height={innerHeightScatter} width={innerWidth}
+                                    hoveredStation={hoveredStation}
+                                    onMouseEnter={setHoveredStation} onMouseOut={() => setHoveredStation(null)}
+                                    setTooltipData={setTooltipData} setTooltipPos={setTooltipPos}
+                        />
                     </svg>
                 </Col>
                 <Col>
                     <svg width={WIDTH} height={HEIGHT}>
-                        <BarChart offsetX={margin.left} offsetY={margin.top} data={data} xScale={xScaleBar} 
-                        yScale={yScaleBar} height={innerHeightBar} width={innerWidth}
+                        <BarChart offsetX={margin.left} offsetY={margin.top} data={data}
+                        xScale={xScaleBar} yScale={yScaleBar}
+                        height={innerHeightBar} width={innerWidth}
                         hoveredStation={hoveredStation}
-                        onMouseEnter={setHoveredStation}
-                        onMouseOut={() => setHoveredStation(null)}/>
+                        onMouseEnter={setHoveredStation} onMouseOut={() => setHoveredStation(null)}/>
                     </svg>
                 </Col>
             </Row>
-            {/* Q1.6: add the Tooltip 
+            {/* Q1.6: add the Tooltip
             1. you should get the selected pointed first and pass it to the <Tooltip />
             2. you should define the hooks for X and Y coordinates of the tooltip; 
             3. to get the position of the mouse event, you can use event.pageX and event.pageY;
