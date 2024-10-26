@@ -17,11 +17,6 @@ function Points(props) {
         onMouseEnter(dataPoint.station);
     };
 
-    const handleMouseOut = () => {
-        setTooltipData(null);
-    };
-
-
     if (data) {
         return (
             <g>
@@ -45,7 +40,7 @@ function Points(props) {
                         stroke="black"
                         strokeWidth={1}
                         onMouseEnter={(event) => handleMouseEnter(d, event)}
-                        onMouseOut={handleMouseOut}
+                        onMouseOut={() => {setTooltipData(null);}}
                         style={{ transition: 'fill 0.2s, r 0.2s' }}
                     />
                 ))}
