@@ -17,17 +17,20 @@ import React, { useRef, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.css'
 
 function XAxis(props) {
-    const { xScale, height, width, axisLabel, tickSize=6, fontSize = 12 } = props;
+    const { xScale, height, width, axisLabel, fontSize = 12, rotateLabels=false} = props;
     const ref = useRef();
 
     useEffect(() => {
         if (xScale) {
             const axis = typeof xScale.domain()[0] === 'number'
-                ? d3.axisBottom(xScale).tickSize(tickSize)
-                : d3.axisBottom(xScale).tickFormat(d => d).tickSize(tickSize);
+                ? d3.axisBottom(xScale)
+                : d3.axisBottom(xScale).tickFormat(d => d);
             d3.select(ref.current).call(axis);
+            if (rotateLabels){
+                d3.select(ref.current).selectAll("text").attr("transform", "end");
+            }
         }
-    }, [xScale, tickSize]);
+    }, [xScale, rotateLabels]);
 
     return (
         <g ref={ref} transform={`translate(0, ${height})`}>

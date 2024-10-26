@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 
 
 function YAxis(props) {
-    const { yScale, height, axisLabel } = props;
+    const { yScale, height, axisLabel, fontSize=12} = props;
     const ref = useRef();
 
     useEffect(() => {
@@ -18,7 +18,7 @@ function YAxis(props) {
         <g ref={ref}>
             {yScale && (
                 <text
-                    style={{ textAnchor: 'end', fontSize: '18px' }}
+                    style={{ textAnchor: 'end', fontSize: '${fontSize}px' }}
                     transform={`rotate(-90)`}
                     x={-height / 2}
                     y={-45}

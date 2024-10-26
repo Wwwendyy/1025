@@ -2,6 +2,7 @@ import React from 'react';
 import XAxis from './xAxis';
 import YAxis from './yAxis';
 import Bars from './bars';
+import { TurborepoAccessTraceResult } from 'next/dist/build/turborepo-access-trace';
 function BarChart(props){
     const {offsetX, offsetY, data, xScale, yScale, height, width} = props;
     //task1: transform the <g> with the offsets so that the barchart can show properly 
@@ -9,7 +10,7 @@ function BarChart(props){
     return <g transform={`translate(${offsetX}, ${offsetY})`}>
             <Bars data={data} xScale={xScale} yScale={yScale} height={height}/>
             <YAxis yScale={yScale} height={height} axisLable={"Bikers star from"}/>
-            <XAxis xScale={xScale} height={height} width={width} axisLabel={"Stations"}/>
+            <XAxis xScale={xScale} height={height} width={width} axisLabel={"Stations"} rotateLabels={TurborepoAccessTraceResult}/>
         </g>
 }
 
