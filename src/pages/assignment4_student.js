@@ -1,4 +1,3 @@
-
 import React from 'react'
 import * as d3 from "d3"
 import 'bootstrap/dist/css/bootstrap.css'
@@ -50,15 +49,14 @@ const Charts = () => {
 
     const maxStart = d3.max(dataAll, d => d.start);
 
-
     const xScaleScatter = d3.scaleLinear()
-        .domain([0, d3.max(dataAll, d => d.tripdurationS)])
-        .range([0, innerWidth])
-        .nice();
+                            .domain([0, d3.max(dataAll, d => d.tripdurationS)])
+                            .range([0, innerWidth])
+                            .nice();
     const yScaleScatter = d3.scaleLinear()
-        .domain([0, d3.max(dataAll, d => d.tripdurationE)])
-        .range([innerHeightScatter, 0])
-        .nice();
+                            .domain([0, d3.max(dataAll, d => d.tripdurationE)])
+                            .range([innerHeightScatter, 0])
+                            .nice();
 
 //Q1.2: Complete the xScaleBar and yScaleBar
 //Hint: use d3.scaleBand for xScaleBar
@@ -68,7 +66,7 @@ const Charts = () => {
                         .padding(0.1);
 
     const yScaleBar = d3.scaleLinear()
-                        .domain([0, maxStart])
+                        .domain([0, d3.max(dataAll, d => d.start)])
                         .range([innerHeightBar, 0])
                         .nice();
 
