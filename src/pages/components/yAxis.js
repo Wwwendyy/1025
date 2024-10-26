@@ -9,7 +9,6 @@ function YAxis(props) {
     useEffect(() => {
         if (yScale) {
             const isLinear = typeof yScale.domain()[0] === 'number';
-            
             const axis = axisLeft(yScale);
             select(axisRef.current).call(axis);
         }
