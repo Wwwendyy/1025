@@ -48,6 +48,9 @@ const Charts = () => {
         return d.month === MONTH[month] 
     });
 
+    const maxStart = d3.max(dataAll, d => d.start);
+
+
     const xScaleScatter = d3.scaleLinear()
         .domain([0, d3.max(dataAll, d => d.tripdurationS)])
         .range([0, innerWidth])
@@ -65,7 +68,7 @@ const Charts = () => {
                         .padding(0.1);
 
     const yScaleBar = d3.scaleLinear()
-                        .domain([0, d3.max(data, d => d.start)])
+                        .domain([0, maxStart])
                         .range([innerHeightBar, 0])
                         .nice();
 
