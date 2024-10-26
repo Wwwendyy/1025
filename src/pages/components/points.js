@@ -1,65 +1,62 @@
 import React from 'react';
 
 function Points(props) {
-    const { data, xScale, yScale, width, height, selectedItem, setItem, setTooltipX, setTooltipY} = props;
+    const { data, xScale, yScale, height, width, hoveredStation, setTooltipData, setTooltipPos, onMouseEnter } = props;
 
-    const mouseOver = (i, event) => {
-        setItem(i);
-        setTooltipX(event.pageX);
-        setTooltipY(event.pageY);
+    // Function to determine the color of the circle
+    const getColor = (station) => {
+        return station === hoveredStation ? 'red' : 'steelblue';
     };
 
-    const mouseOut = () => {
-
-        setItem(null);  
+    // Function to determine the radius of the circle
+    const getRadius = (station) => {
+        return station === hoveredStation ? 10 : 5;
     };
 
-    const getColor = i => i === selectedItem ? "red" : "steelblue";
-    const getRadius = i => i === selectedItem ? 10 : 5;
+    const handleMouseEnter = (dataPoint, event) => {
+        setTooltipData(dataPoint);
+        setTooltipPos({ x: event.pageX, y: event.pageY });
+        onMouseEnter(dataPoint.station);
+    };
+
+    const handleMouseOut = () => {
+        setTooltipData(null);
+    };
+
 
     if (data) {
         return (
             <g>
-                {selectedItem !== null && (
+                {/* Yellow rectangle covering all points when a point is hovered */}
+                {hoveredStation && (
                     <rect
                         x={0}
                         y={0}
                         width={width}
                         height={height}
                         fill="yellow"
-                        opacity={0.6} 
+                        opacity={0.5}
                     />
                 )}
                 {data.map((d, i) => (
-                    i !== selectedItem && (
-                        <circle
-                            key={i}
-                            cx={xScale(d.tripdurationS)}
-                            cy={yScale(d.tripdurationE)}
-                            r={getRadius(i)}
-                            fill={getColor(i)}  
-                            stroke={"black"}
-                            onMouseOver={(event) => mouseOver(i, event)}
-                            onMouseOut={mouseOut}
-                        />
-                    )
-                ))}
-
-                {selectedItem !== null && (
                     <circle
-                        cx={xScale(data[selectedItem].tripdurationS)}
-                        cy={yScale(data[selectedItem].tripdurationE)}
-                        r={getRadius(selectedItem)}
-                        fill={getColor(selectedItem)}
-                        stroke={"black"}
-                        onMouseOver={(event) => mouseOver(selectedItem, event)}
-                        onMouseOut={mouseOut}
+                        key={i}
+                        cx={xScale(d.tripdurationS)} 
+                        cy={yScale(d.tripdurationE)}
+                        r={getRadius(d.station)}
+                        fill={getColor(d.station)}
+                        stroke="black"
+                        strokeWidth={1}
+                        onMouseEnter={(event) => handleMouseEnter(d, event)}
+                        onMouseOut={handleMouseOut}
+                        style={{ transition: 'fill 0.2s, r 0.2s' }}
                     />
-                )}
+                ))}
             </g>
         );
     } else {
         return <g></g>;
     }
 }
+
 export default Points;

@@ -8,7 +8,6 @@ import BarChart from './components/barChart'
 import Tooltip from './components/tooltips'
 
 
-
 const csvUrl = 'https://gist.githubusercontent.com/hogwild/3b9aa737bde61dcb4dfa60cde8046e04/raw/citibike2020.csv'
 
 function useData(csvPath){
@@ -26,16 +25,15 @@ function useData(csvPath){
     }, []);
     return dataAll;
 }
-
 const Charts = () => {
     const [month, setMonth] = React.useState('4');
-    const [selectedItem, setItem] = React.useState(null);
-    const [pageX, setTooltipX] = React.useState(null);
-    const [pageY, setTooltipY] = React.useState(null);
+    const [hoveredStation, setHoveredStation] = React.useState(null);
     //Q1.5 define hooks to link the points and bars
     //Notes: you should define the hooks at the beginning of the component; a hook cannot be defined after the if ... else... statement;
-
+    const [tooltipData, setTooltipData] = React.useState(null);
+    const [tooltipPos, setTooltipPos] = React.useState({x: 0, y: 0});
     const dataAll = useData(csvUrl);
+
     if (!dataAll) {
         return <pre>Loading...</pre>;
     };
@@ -61,22 +59,18 @@ const Charts = () => {
 
 //Q1.2: Complete the xScaleBar and yScaleBar
 //Hint: use d3.scaleBand for xScaleBar
-    var stations = data.map(d => {
-        return d.station;
-    });
     const xScaleBar = d3.scaleBand()
-        .domain(stations)
-        .range([0, innerWidth])
-        .padding(0.1);
+                        .domain(data.map(d => d.station))
+                        .range([innerWidth, 0])
+                        .padding(0.1);
 
     const yScaleBar = d3.scaleLinear()
-        .domain([0, d3.max(dataAll, d => d.start)])
-        .range([innerHeightBar, 0])
-        .nice();
+                        .domain([0, d3.max(data, d => d.start)])
+                        .range([innerHeightBar, 0])
+                        .nice();
 
-    const changeHandler = (event) => {
-        setMonth(event.target.value);
-    };
+    const changeHandler = (event) => {setMonth(event.target.value);};
+
     return (
         <Container >
             <Row>
@@ -86,40 +80,24 @@ const Charts = () => {
                 </Col>
             </Row>
             <Row className='justify-content-md-center'>
-                {/*Scatter Plot */}
                 <Col>
                     <svg width={WIDTH} height={HEIGHT}>
-                        <ScatterPlot
-                            offsetX={margin.left}
-                            offsetY={margin.top}
-                            data={data}
-                            xScale={xScaleScatter}
-                            yScale={yScaleScatter}
-                            height={innerHeightScatter}
-                            width={innerWidth}
-                            selectedItem={selectedItem}
-                            setItem={setItem}
-                            pageX={pageX}
-                            setTooltipX={setTooltipX}
-                            pageY={pageY}
-                            setTooltipY={setTooltipY}/>
+                        <ScatterPlot offsetX={margin.left} offsetY={margin.top} data={data} xScale={xScaleScatter} yScale={yScaleScatter} 
+                        height={innerHeightScatter} width={innerWidth} 
+                        hoveredStation={hoveredStation}
+                        onMouseEnter={setHoveredStation}
+                        onMouseOut={() => setHoveredStation(null)}
+                        setTooltipData={setTooltipData} // Pass hooks to Points
+                        setTooltipPos={setTooltipPos}/>
                     </svg>
                 </Col>
-            </Row>
-            <Row>
                 <Col>
-                {/*Bar Chart */}
                     <svg width={WIDTH} height={HEIGHT}>
-                        <BarChart
-                            offsetX={margin.left}
-                            offsetY={margin.top}
-                            data={data}
-                            xScale={xScaleBar}
-                            yScale={yScaleBar}
-                            height={innerHeightBar}
-                            width={innerWidth}
-                            selectedItem={selectedItem}
-                            setItem={setItem}/>
+                        <BarChart offsetX={margin.left} offsetY={margin.top} data={data} xScale={xScaleBar} 
+                        yScale={yScaleBar} height={innerHeightBar} width={innerWidth}
+                        hoveredStation={hoveredStation}
+                        onMouseEnter={setHoveredStation}
+                        onMouseOut={() => setHoveredStation(null)}/>
                     </svg>
                 </Col>
             </Row>
@@ -128,21 +106,16 @@ const Charts = () => {
             2. you should define the hooks for X and Y coordinates of the tooltip; 
             3. to get the position of the mouse event, you can use event.pageX and event.pageY;
             */}
-            <Row>
-                <Col>
-                    <div>
-                        <Tooltip
-                            x={pageX}
-                            y={pageY}
-                            d={data[selectedItem]}
-                        />
-                    </div>
-                </Col>
-            </Row>
+            {tooltipData && (
+                <Tooltip
+                    x={tooltipPos.x}
+                    y={tooltipPos.y}
+                    d={tooltipData}
+                />
+            )}
         </Container>
-    )   
+    )
 }
-
 
 export default Charts
 

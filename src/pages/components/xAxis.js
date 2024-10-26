@@ -11,54 +11,34 @@
 // - data: the data items
 // - xScale: the scale for the x coordinate
 // - yScale: the scale for the y coordinate
-
 import React from 'react';
 import { select } from 'd3-selection';
 import { axisBottom } from 'd3-axis';
 
 function XAxis(props) {
     const { xScale, height, width, axisLabel} = props;
-    if (!xScale) return null; // Ensure xScale is defined
+    const axisRef = React.useRef(null);
 
-    const isLinear = typeof xScale.domain()[0] === 'number';
+    // Create the axis whenever xScale changes
+    React.useEffect(() => {
+        if (xScale) {
+            const axis = axisBottom(xScale);
+            select(axisRef.current).call(axis);
+            }
+            const isLinear = typeof xScale.domain()[0] === 'number';
+
+            select(axisRef.current)
+                .selectAll("text")
+                .style("text-anchor", "start")
+                .attr("transform", isLinear ? "rotate(0)" : "rotate(70)");
+    }, [xScale]);
 
     return (
-        <g>
-            {/* Render the axis line */}
-            <line x1={0} y1={height} x2={width} y2={height} stroke="black" />
-
-            {/* Render ticks for linear scale */}
-            {isLinear && xScale.ticks().map(tick => (
-                <g key={tick} transform={`translate(${xScale(tick)}, ${height})`}>
-                    <line y2={5} stroke="black" />
-                    <text
-                        style={{ textAnchor: 'middle', fontSize: '10px' }}
-                        y={15}
-                    >
-                        {tick}
-                    </text>
-                </g>
-            ))}
-            {!isLinear && xScale.domain().map(tickValue => (
-                <g key={tickValue} transform={`translate(${xScale(tickValue) + xScale.bandwidth() / 2}, ${height})`}>
-                    <line y2={5} stroke="black" />
-                    <text
-                        style={{ textAnchor: 'middle', fontSize: '10px' }}
-                        y={15}
-                    >
-                        {tickValue}
-                    </text>
-                </g>
-            ))}
-
-            {/* Axis label */}
-            <text
-                style={{ textAnchor: 'end', fontSize: '15px' }}
-                x={width}
-                y={height - 5}
-            >
-                {axisLabel}
-            </text>
+        <g transform={`translate(0, ${height})`}>
+            <g ref={axisRef}></g>
+                <text style={{ textAnchor: 'end', fontSize: '15px' }} transform={`translate(${width}, -10)`}>
+                    {axisLabel}
+                </text>
         </g>
     );
 }
