@@ -7,10 +7,10 @@ function ScatterPlot(props) {
     const { offsetX, offsetY, data, xScale, yScale,
             height, width, infoStation, onMouseEnter, onMouseOut,
             setTooltipData, setTooltipPos } = props;
-    const handleMouseEnter = (station, event) => {setTooltipData(station);
+    /*const handleMouseEnter = (station, event) => {setTooltipData(station);
                                                 setTooltipPos({ x: event.pageX, y: event.pageY });
                                                 onMouseEnter(station);
-                                                };
+                                                };*/
     return (
         <g transform={`translate(${offsetX}, ${offsetY})`}>
             <Points

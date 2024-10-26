@@ -2,10 +2,8 @@ import React from 'react';
 
 function Bars(props) {
     const { data, xScale, yScale, height, infoStation, onMouseEnter, onMouseOut } = props;
-    // Function to determine the color of the bar
-    const barColor = (station) => {
-        return station === infoStation ? 'red' : 'steelblue';
-    };
+
+    const barColor = (station) => {return station === infoStation ? 'red' : 'steelblue';};
         //Note:
         //the if(data){...} means when data is not null, the component will return the bars; otherwise, it returns <g></g>
         //we use the if ... else ... in this place so that the code can work with the SSR in Next.js;
@@ -26,9 +24,9 @@ function Bars(props) {
                         fill={barColor(d.station)}
                         stroke="black"
                         strokeWidth={1}
-                        onMouseEnter={() => onMouseEnter(d.station)} // Use the passed onMouseEnter
-                        onMouseOut={onMouseOut} // Use the passed onMouseOut
-                        style={{ transition: 'fill 0.2s' }} 
+                        onMouseEnter={() => onMouseEnter(d.station)}
+                        onMouseOut={onMouseOut}
+                        style={{ transition: 'fill 0.2s' }}
                     />
                 ))}
             </g>

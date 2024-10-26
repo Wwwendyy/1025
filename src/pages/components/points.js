@@ -3,19 +3,15 @@ import React from 'react';
 function Points(props) {
     const { data, xScale, yScale, height, width, infoStation, setTooltipData, setTooltipPos, onMouseEnter } = props;
 
-    const circleColor = (station) => {
-        return station === infoStation ? 'red' : 'steelblue';
-    };
+    const circleColor = (station) => {return station === infoStation ? 'red' : 'steelblue';};
 
-    const circleRadius = (station) => {
-        return station === infoStation ? 10 : 5;
-    };
+    const circleRadius = (station) => {return station === infoStation ? 10 : 5;};
 
     const handleMouseEnter = (dataPoint, event) => {
-        setTooltipData(dataPoint);
-        setTooltipPos({ x: event.pageX, y: event.pageY });
-        onMouseEnter(dataPoint.station);
-    };
+                                                    setTooltipData(dataPoint);
+                                                    setTooltipPos({ x: event.pageX, y: event.pageY });
+                                                    onMouseEnter(dataPoint.station);
+                                                };
 
     if (data) {
         return (
