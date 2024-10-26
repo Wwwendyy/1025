@@ -1,29 +1,33 @@
 import React, { useRef, useEffect } from 'react';
-import { axisLeft } from 'd3-axis'; // Import axisLeft from d3-axis
-import { select } from 'd3-selection';
 
 function YAxis(props) {
     const { yScale, height, axisLabel } = props; // Correct axisLabel spelling
-    const axisRef = useRef(null); // Use useRef here
+    if (!yScale || !yScale.ticks) {
+        return <g></g>;
+    }
 
-    useEffect(() => {
-        if (yScale) {
-            const isLinear = typeof yScale.domain()[0] === 'number';
-            const axis = axisLeft(yScale);
-            select(axisRef.current).call(axis);
-        }
-    }, [yScale]); // Only depend on yScale
+    const ticks = yScale.ticks();
+    console.log("yaxisticks:", ticks);
 
     return (
         <g>
-            <g ref={axisRef}></g>
-            <svg>
-                <text style={{ textAnchor: 'end', fontSize: '15px' }} transform={`translate(20, 0) rotate(-90)`}>
-                    {axisLabel}
-                </text>
-            </svg>
+            <line y2={height} stroke={"black"} />
+            {ticks.map(tick => (
+                <g key={tick} transform={`translate(-5, ${yScale(tick)})`}>
+                    <line x2={5} stroke={'black'} />
+                    <text style={{ textAnchor: 'end', fontSize: '10px' }} x={0}>
+                        {tick}
+                    </text>
+                </g>
+            ))}
+
+            <text
+                style={{ textAnchor: 'end', fontSize: '15px' }}
+                transform={`translate(20, 0)rotate(-90)`}
+            >
+                {axisLable}
+            </text>
         </g>
     );
 }
-
-export default YAxis;
+export default YAxis

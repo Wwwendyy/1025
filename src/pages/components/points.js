@@ -4,7 +4,7 @@ function Points(props) {
     const { data, xScale, yScale, width, height, selectedItem, setItem, setTooltipX, setTooltipY} = props;
 
     const mouseOver = (i, event) => {
-        setItem(i); 
+        setItem(i);
         setTooltipX(event.pageX);
         setTooltipY(event.pageY);
     };
@@ -47,7 +47,7 @@ function Points(props) {
 
                 {selectedItem !== null && (
                     <circle
-                        cx={xScale(data[selectedItem].tripdurationS)}  
+                        cx={xScale(data[selectedItem].tripdurationS)}
                         cy={yScale(data[selectedItem].tripdurationE)}
                         r={getRadius(selectedItem)}
                         fill={getColor(selectedItem)}

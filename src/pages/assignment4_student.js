@@ -23,7 +23,7 @@ function useData(csvPath){
             });
             setData(data);
         });
-    }, [csvPath]);
+    }, []);
     return dataAll;
 }
 
@@ -97,7 +97,8 @@ const Charts = () => {
                             yScale={yScaleScatter}
                             height={innerHeightScatter}
                             width={innerWidth}
-                            selectedItem={selectedItem} setItem={setItem}
+                            selectedItem={selectedItem}
+                            setItem={setItem}
                             pageX={pageX}
                             setTooltipX={setTooltipX}
                             pageY={pageY}
