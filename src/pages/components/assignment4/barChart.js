@@ -1,6 +1,6 @@
 import React from 'react';
 import Bars from './bars';
-import YAxis from '../yAxis';
+import YAxis from './yAxis';
 import XAxis from './xAxis';
 
 function BarChart(props){
