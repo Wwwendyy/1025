@@ -16,20 +16,10 @@ function Points(props) {
     if (data) {
         return (
             <g>
-                {infoStation && (
-                    <rect
-                        x={0}
-                        y={0}
-                        height={height}
-                        width={width}
-                        opacity={0.5}
-                        fill="yellow"
-                    />
-                )}
                 {data.map((d, i) => (
                     <circle
                         key={i}
-                        cx={xScale(d.tripdurationS)} 
+                        cx={xScale(d.tripdurationS)}
                         cy={yScale(d.tripdurationE)}
                         r={getRadius(d.station)}
                         fill={getColor(d.station)}
@@ -40,6 +30,16 @@ function Points(props) {
                         style={{ transition: 'fill 0.2s, r 0.2s' }}
                     />
                 ))}
+                {infoStation && (
+                    <rect
+                        x={0}
+                        y={0}
+                        height={height}
+                        width={width}
+                        opacity={0.5}
+                        fill="yellow"
+                    />
+                )}
             </g>
         );
     } else {
