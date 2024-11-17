@@ -31,17 +31,28 @@ function Points(props) {
                     />
                 ))}
                 {infoStation && (
-                    <g>
-                        <rect
-                            x={0}
-                            y={0}
-                            height={height}
-                            width={width}
-                            opacity={0.5}
-                            fill="yellow"
-                        />
-                    </g>
+                <rect
+                    x={0}
+                    y={0}
+                    height={height}
+                    width={width}
+                    opacity={0.5}
+                    fill="yellow"
+                    style={{ pointerEvents: 'none' }}
+                />
                 )}
+                {infoStation && data.filter(d => d.station === infoStation).map((d, i) => (
+                    <circle
+                        key={`highlight-${i}`}
+                        cx={xScale(d.tripdurationS)}
+                        cy={yScale(d.tripdurationE)}
+                        r={getRadius(d.station)}
+                        fill={getColor(d.station)}
+                        strokeWidth={2}
+                        stroke="black"
+                        style={{ transition: 'fill 0.2s, r 0.2s' }}
+                    />
+                ))}
             </g>
         );
     } else {
