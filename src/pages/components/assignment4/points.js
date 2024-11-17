@@ -31,14 +31,16 @@ function Points(props) {
                     />
                 ))}
                 {infoStation && (
-                    <rect
-                        x={0}
-                        y={0}
-                        height={height}
-                        width={width}
-                        opacity={0.5}
-                        fill="yellow"
-                    />
+                    <g>
+                        <rect
+                            x={0}
+                            y={0}
+                            height={height}
+                            width={width}
+                            opacity={0.5}
+                            fill="yellow"
+                        />
+                    </g>
                 )}
             </g>
         );
